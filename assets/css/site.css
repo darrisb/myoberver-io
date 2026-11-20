@@ -636,7 +636,7 @@ h2 {
   color: var(--text-2);
 }
 
-.map {
+#geo-preview .map {
   position: relative;
   height: 400px;
   background: #E9EEF2;
@@ -655,7 +655,7 @@ h2 {
 
 .map__road {
   position: absolute;
-  background: #FFFFFF;
+  background: #FFFFFF; /* spec: white roads (same value as --surface) */
 }
 
 .map__road--h1 {
@@ -696,16 +696,16 @@ h2 {
   transform: rotate(-14deg);
 }
 
-.cluster {
+#geo-preview .cluster {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(31, 75, 255, 0.18);
+  background: rgba(31, 75, 255, 0.18); /* spec: cluster halo (--accent #1F4BFF at 18%) */
 }
 
-.cluster .dot {
+#geo-preview .cluster .dot {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -717,7 +717,7 @@ h2 {
   line-height: 1;
 }
 
-.cluster .ring {
+#geo-preview .cluster .ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
@@ -725,17 +725,17 @@ h2 {
   opacity: 0;
 }
 
-.pin-shadow {
+#geo-preview .pin-shadow {
   position: absolute;
   left: 263px;
   top: 192px;
   width: 20px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(14, 23, 38, 0.45);
+  background: rgba(14, 23, 38, 0.45); /* spec: pin shadow (--ink #0E1726 at 45%) */
 }
 
-.map .pin {
+#geo-preview .pin {
   position: absolute;
   left: 258px;
   top: 156px;
@@ -750,7 +750,7 @@ h2 {
   padding: 14px;
   border-radius: 12px;
   background: var(--surface);
-  box-shadow: 0 12px 28px -8px rgba(14, 23, 38, 0.3);
+  box-shadow: 0 12px 28px -8px rgba(14, 23, 38, 0.3); /* spec: shadow color (--ink #0E1726 at 30%) */
 }
 
 .map__popup h3 {

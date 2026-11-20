@@ -248,16 +248,16 @@ check('index.html geo map canvas is <div class="map" aria-hidden="true">', () =>
   );
 });
 
-check("index.html geo map has three .cluster elements, each with .dot and .ring, and --delay 0s/0.3s/0.6s", () => {
+check("index.html geo map has three .cluster elements, each with a child .dot and .ring, and --delay 0s/0.3s/0.6s", () => {
   throwIf(!html, "index.html not available");
-  const clusters = html.match(/<div class="cluster"[^>]*>/g) || [];
-  throwIf(clusters.length !== 3, `expected 3 .cluster elements, found ${clusters.length}`);
-  clusters.forEach((c, i) => throwIf(!c.includes("--delay:"), `cluster[${i}] is missing --delay`));
-  throwIf((html.match(/class="dot"/g) || []).length < 3, "expected at least 3 .dot elements");
-  throwIf((html.match(/class="ring"/g) || []).length < 3, "expected at least 3 .ring elements");
-  for (const delay of ["--delay: 0s", "--delay: 0.3s", "--delay: 0.6s"]) {
-    throwIf(!html.includes(delay), `missing ${delay}`);
-  }
+  const clusterBlocks = html.match(/<div class="cluster"[^>]*>[\s\S]*?<\/div>/g) || [];
+  throwIf(clusterBlocks.length !== 3, `expected 3 .cluster elements, found ${clusterBlocks.length}`);
+  const expectedDelays = ["--delay: 0s", "--delay: 0.3s", "--delay: 0.6s"];
+  clusterBlocks.forEach((block, i) => {
+    throwIf(!block.includes('class="dot"'), `cluster[${i}] is missing a child <span class="dot">`);
+    throwIf(!block.includes('class="ring"'), `cluster[${i}] is missing a child <span class="ring">`);
+    throwIf(!block.includes(expectedDelays[i]), `cluster[${i}] is missing ${expectedDelays[i]}`);
+  });
 });
 
 check('index.html geo pin is <svg class="pin" width="30" height="40" viewBox="0 0 24 32">', () => {
@@ -266,6 +266,17 @@ check('index.html geo pin is <svg class="pin" width="30" height="40" viewBox="0 
     !/<svg[^>]*class="pin"[^>]*width="30"[^>]*height="40"[^>]*viewBox="0 0 24 32"/.test(html),
     'missing <svg class="pin" width="30" height="40" viewBox="0 0 24 32">',
   );
+});
+
+check("index.html has <div class=\"pin-shadow\"> and site.css .pin-shadow is absolutely positioned at 263px/192px", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(!/<div class="pin-shadow"><\/div>/.test(html), "missing <div class=\"pin-shadow\">");
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.pin-shadow\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .pin-shadow rule");
+  for (const decl of ["position: absolute", "left: 263px", "top: 192px"]) {
+    throwIf(!rule[0].includes(decl), `.pin-shadow is missing "${decl}"`);
+  }
 });
 
 check("index.html geo section has the exact h2 copy", () => {
