@@ -2,6 +2,7 @@
 import { loadApps } from "./data.js";
 import { renderAppLauncher } from "./apps.js";
 import { buildMeter } from "./voice.js";
+import { initPreviewAnimations } from "./animations.js";
 
 // MT-003: hero app launcher — list from data/apps.json.
 // On load failure loadApps() resolves to [] and renderAppLauncher
@@ -14,5 +15,10 @@ loadApps().then((apps) => {
 });
 
 // MT-005: Voice AI call preview — build the 40 meter bars
-// (no animation yet; --d / --delay are set for the animation task).
+// (--d / --delay feed the scroll-triggered animation below).
 buildMeter(document.querySelector("#voice-preview .meter"));
+
+// MT-007: scroll-triggered animations for the voice and geo previews
+// (IntersectionObserver, finite keyframes, never under
+// prefers-reduced-motion: reduce).
+initPreviewAnimations();

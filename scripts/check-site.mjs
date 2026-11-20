@@ -314,6 +314,59 @@ check("assets/css/site.css .pin has transform-origin: 50% 100%", () => {
   throwIf(!rule[0].includes("transform-origin: 50% 100%"), '.pin is missing "transform-origin: 50% 100%"');
 });
 
+// --- MT-007: scroll-triggered animations for voice and geo previews
+check("assets/js/animations.js exists and exports initPreviewAnimations()", () => {
+  const src = read("assets/js/animations.js");
+  throwIf(!exportedFn(src, "initPreviewAnimations"), "missing export of initPreviewAnimations()");
+  throwIf(!src.includes("IntersectionObserver"), "missing IntersectionObserver usage");
+  throwIf(!/\bthreshold:\s*0\.35\b/.test(src), "missing IntersectionObserver threshold 0.35");
+  throwIf(!/offsetWidth/.test(src), "missing forced reflow (void el.offsetWidth) for a clean restart");
+  throwIf(!/prefers-reduced-motion: reduce/.test(src), "missing prefers-reduced-motion: reduce guard");
+});
+
+check("assets/js/main.js calls initPreviewAnimations() after building the meter", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./animations.js"'), 'missing import from "./animations.js"');
+  throwIf(!src.includes("initPreviewAnimations("), "missing initPreviewAnimations() call");
+  throwIf(
+    src.indexOf("buildMeter(") === -1 ||
+      src.indexOf("initPreviewAnimations(") === -1 ||
+      src.indexOf("initPreviewAnimations(") < src.indexOf("buildMeter("),
+    "initPreviewAnimations() must be called after buildMeter()",
+  );
+});
+
+check("assets/css/site.css contains the mo-eq, mo-bounce, mo-ring and mo-blink keyframes plus a prefers-reduced-motion block", () => {
+  const css = read("assets/css/site.css");
+  for (const name of ["mo-eq", "mo-bounce", "mo-ring", "mo-blink"]) {
+    throwIf(!new RegExp(`@keyframes\\s+${name}\\s*\\{`).test(css), `missing @keyframes ${name}`);
+  }
+  throwIf(
+    !/@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{[\s\S]*?animation:\s*none/.test(css),
+    "missing @media (prefers-reduced-motion: reduce) block disabling the animations",
+  );
+});
+
+check("assets/css/site.css animation rules are finite (no infinite iteration count)", () => {
+  const css = read("assets/css/site.css");
+  throwIf(/animation:.*infinite/.test(css), "found an infinite animation iteration count");
+  for (const rule of [
+    "#voice-preview.is-playing .bar",
+    "#geo-preview.is-playing .pin",
+    "#geo-preview.is-playing .pin-shadow",
+    "#geo-preview.is-playing .cluster .ring",
+    "#geo-preview.is-playing .cluster .dot",
+  ]) {
+    const escaped = rule.replace(/[.#]/g, "\\$&");
+    const match = css.match(new RegExp(`${escaped}\\s*\\{[^}]*\\}`));
+    throwIf(!match, `missing animation rule for ${rule}`);
+    throwIf(
+      !/animation:/.test(match[0]),
+      `rule for ${rule} has no animation declaration`,
+    );
+  }
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
