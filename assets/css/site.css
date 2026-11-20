@@ -144,7 +144,7 @@ h2 {
   border-color: var(--muted-2);
 }
 
-.btn-sm {
+.btn.btn-sm {
   min-height: 44px;
   padding: 0 18px;
   border-radius: var(--radius-btn-sm);

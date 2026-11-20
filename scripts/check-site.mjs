@@ -95,8 +95,11 @@ check("index.html hero has the exact h1 copy", () => {
 
 check("index.html header nav links to #apps, #voice, #geo, #wordpress", () => {
   throwIf(!html, "index.html not available");
+  const headerMatch = html.match(/<header[\s\S]*?<\/header>/);
+  throwIf(!headerMatch, "missing <header> block");
+  const header = headerMatch[0];
   for (const id of ["apps", "voice", "geo", "wordpress"]) {
-    throwIf(!html.includes(`href="#${id}"`), `missing header nav link to #${id}`);
+    throwIf(!header.includes(`href="#${id}"`), `missing header nav link to #${id}`);
   }
 });
 
