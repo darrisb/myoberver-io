@@ -266,3 +266,126 @@ h2 {
   white-space: nowrap;
   border: 0;
 }
+
+/* --- App launcher (docs/design/02-app-launcher.md) --- */
+.hero__apps {
+  align-self: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+  overflow: hidden;
+}
+
+.app-launcher__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.app-launcher__title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.app-launcher__domain {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+.app-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-list[hidden] {
+  display: none;
+}
+
+.app-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 88px;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--row-divider);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.app-row--more {
+  background: var(--surface-alt);
+}
+
+.app-row__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--ink);
+}
+
+.app-row__icon--more {
+  background: transparent;
+  border: 1.5px dashed #9AA6B6;
+}
+
+.app-row__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-row__name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.25;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-row__desc {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-row__chip {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-chip);
+  white-space: nowrap;
+}
+
+.app-row__chip--live {
+  background: var(--chip-live-bg);
+  color: var(--chip-live-text);
+}
+
+.app-row__chip--soon {
+  background: var(--chip-soon-bg);
+  color: var(--chip-soon-text);
+}
+
+.app-row__chevron {
+  flex: 0 0 auto;
+  color: var(--muted-2);
+}

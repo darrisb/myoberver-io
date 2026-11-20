@@ -129,6 +129,31 @@ check("every file referenced by index.html (css, js, favicons) exists", () => {
   throwIf(checked === 0, "no local file references found (expected css/js/favicon links)");
 });
 
+// --- assets/js (MT-003: shared data loader and app launcher)
+const exportedFn = (src, name) =>
+  new RegExp(`export\\s+function\\s+${name}\\s*\\(`).test(src) ||
+  new RegExp(`export\\s*\\{[^}]*\\b${name}\\b`).test(src);
+
+check("assets/js/data.js exists and exports loadApps() and loadPlugins()", () => {
+  const src = read("assets/js/data.js");
+  for (const name of ["loadApps", "loadPlugins"]) {
+    throwIf(!exportedFn(src, name), `missing export of ${name}()`);
+  }
+});
+
+check("assets/js/apps.js exists and exports renderAppLauncher()", () => {
+  const src = read("assets/js/apps.js");
+  throwIf(!exportedFn(src, "renderAppLauncher"), "missing export of renderAppLauncher()");
+});
+
+check("assets/js/main.js loads apps and renders the launcher", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./data.js"'), 'missing import from "./data.js"');
+  throwIf(!src.includes('from "./apps.js"'), 'missing import from "./apps.js"');
+  throwIf(!src.includes("loadApps("), "missing loadApps() call");
+  throwIf(!src.includes("renderAppLauncher("), "missing renderAppLauncher() call");
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
