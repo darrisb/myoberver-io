@@ -1,7 +1,10 @@
 // assets/js/apps.js — hero app launcher (docs/design/02-app-launcher.md).
-// Renders the static panel (header + one row per app) from a loaded app
-// list. No auto-scroll yet (separate task). All DOM built with
-// createElement/textContent — no innerHTML with data values.
+// Renders the panel (header + one row per app) from a loaded app list
+// and applies the looping vertical auto-scroll to the list (loop-scroll
+// module). All DOM built with createElement/textContent — no innerHTML
+// with data values.
+
+import { createLoopScroller } from "./loop-scroll.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -143,4 +146,10 @@ export function renderAppLauncher(navEl, apps) {
   // replaceChildren (not appendChild) so a re-render replaces the panel
   // content instead of duplicating header/list.
   navEl.replaceChildren(header, list);
+
+  // MT-004: loop the list vertically. No-op while the rows fit in the
+  // max-height (and never under prefers-reduced-motion: reduce).
+  if (navEl.__appLoop) navEl.__appLoop.destroy();
+  navEl.__appLoop = createLoopScroller(list, { axis: "y" });
+  navEl.__appLoop.start();
 }

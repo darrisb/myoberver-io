@@ -44,6 +44,7 @@
   --radius-cta: 20px;
   --radius-chip: 999px;
   --shadow-panel: 0 24px 48px -24px rgba(14, 23, 38, 0.25);
+  --rows-shown: 3; /* app launcher rows visible before looping scroll */
 }
 
 * {
@@ -302,6 +303,15 @@ h2 {
 .app-list {
   display: flex;
   flex-direction: column;
+  max-height: calc(var(--rows-shown, 3) * 88px);
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+  overscroll-behavior: contain;
+}
+
+.app-list::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .app-list[hidden] {

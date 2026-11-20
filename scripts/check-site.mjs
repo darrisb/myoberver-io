@@ -154,6 +154,32 @@ check("assets/js/main.js loads apps and renders the launcher", () => {
   throwIf(!src.includes("renderAppLauncher("), "missing renderAppLauncher() call");
 });
 
+// --- MT-004: looping auto-scroll for the app launcher
+check("assets/js/loop-scroll.js exists and exports createLoopScroller()", () => {
+  const src = read("assets/js/loop-scroll.js");
+  throwIf(!exportedFn(src, "createLoopScroller"), "missing export of createLoopScroller()");
+});
+
+check("assets/js/apps.js applies the loop scroller to the app list", () => {
+  const src = read("assets/js/apps.js");
+  throwIf(!src.includes('from "./loop-scroll.js"'), 'missing import from "./loop-scroll.js"');
+  throwIf(!src.includes("createLoopScroller("), "missing createLoopScroller() call");
+});
+
+check("assets/css/site.css .app-list has the looping auto-scroll rules", () => {
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.app-list\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .app-list rule");
+  const block = rule[0];
+  const decls = [
+    "max-height: calc(var(--rows-shown, 3) * 88px)",
+    "overflow-y: auto",
+    "scrollbar-width: none",
+    "overscroll-behavior: contain",
+  ];
+  for (const decl of decls) throwIf(!block.includes(decl), `.app-list is missing "${decl}"`);
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
