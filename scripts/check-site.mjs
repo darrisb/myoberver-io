@@ -231,6 +231,78 @@ check("assets/js/main.js builds the voice meter", () => {
   throwIf(!src.includes("buildMeter("), "missing buildMeter() call");
 });
 
+// --- MT-006: Geo-Locator section with map preview
+check('index.html has <figure id="geo-preview" aria-label="Geo-Locator map preview">', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<figure[^>]*id="geo-preview"[^>]*aria-label="Geo-Locator map preview"/.test(html),
+    'missing <figure id="geo-preview" aria-label="Geo-Locator map preview">',
+  );
+});
+
+check('index.html geo map canvas is <div class="map" aria-hidden="true">', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<div[^>]*class="map"[^>]*aria-hidden="true"/.test(html),
+    'missing <div class="map" aria-hidden="true">',
+  );
+});
+
+check("index.html geo map has three .cluster elements, each with .dot and .ring, and --delay 0s/0.3s/0.6s", () => {
+  throwIf(!html, "index.html not available");
+  const clusters = html.match(/<div class="cluster"[^>]*>/g) || [];
+  throwIf(clusters.length !== 3, `expected 3 .cluster elements, found ${clusters.length}`);
+  clusters.forEach((c, i) => throwIf(!c.includes("--delay:"), `cluster[${i}] is missing --delay`));
+  throwIf((html.match(/class="dot"/g) || []).length < 3, "expected at least 3 .dot elements");
+  throwIf((html.match(/class="ring"/g) || []).length < 3, "expected at least 3 .ring elements");
+  for (const delay of ["--delay: 0s", "--delay: 0.3s", "--delay: 0.6s"]) {
+    throwIf(!html.includes(delay), `missing ${delay}`);
+  }
+});
+
+check('index.html geo pin is <svg class="pin" width="30" height="40" viewBox="0 0 24 32">', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<svg[^>]*class="pin"[^>]*width="30"[^>]*height="40"[^>]*viewBox="0 0 24 32"/.test(html),
+    'missing <svg class="pin" width="30" height="40" viewBox="0 0 24 32">',
+  );
+});
+
+check("index.html geo section has the exact h2 copy", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !html.includes("<h2>Put every location you manage on one map.</h2>"),
+    "missing geo section <h2>Put every location you manage on one map.</h2>",
+  );
+});
+
+check("index.html geo section links to https://app.geo.myobserver.io", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<a[^>]*href="https:\/\/app\.geo\.myobserver\.io"[^>]*>Open Geo-Locator<\/a>/.test(html),
+    'missing <a href="https://app.geo.myobserver.io">Open Geo-Locator</a>',
+  );
+});
+
+check("assets/css/site.css .geo__inner is flex-wrap: wrap-reverse with map first, text after in HTML", () => {
+  throwIf(!html, "index.html not available");
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.geo__inner\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .geo__inner rule");
+  const decls = ["display: flex", "flex-wrap: wrap-reverse", "align-items: center", "gap: 64px", "padding-block: 112px"];
+  for (const decl of decls) throwIf(!rule[0].includes(decl), `.geo__inner is missing "${decl}"`);
+  const fig = html.indexOf('id="geo-preview"');
+  const copy = html.indexOf("geo__copy");
+  throwIf(fig === -1 || copy === -1 || fig > copy, "map preview must come before the text column in the DOM");
+});
+
+check("assets/css/site.css .pin has transform-origin: 50% 100%", () => {
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.pin\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .pin rule");
+  throwIf(!rule[0].includes("transform-origin: 50% 100%"), '.pin is missing "transform-origin: 50% 100%"');
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {

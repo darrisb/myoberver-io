@@ -105,7 +105,70 @@
         </figure>
       </div>
     </section>
-    <section id="geo"></section>
+    <section id="geo">
+      <div class="container geo__inner">
+        <figure id="geo-preview" class="geo-preview" aria-label="Geo-Locator map preview">
+          <div class="geo-preview__toolbar">
+            <span class="geo-preview__search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              Search locations
+            </span>
+            <span class="geo-preview__chip geo-preview__chip--active">All types</span>
+            <span class="geo-preview__chip geo-preview__chip--muted">Available</span>
+            <span class="geo-preview__chip geo-preview__chip--muted">Region</span>
+          </div>
+          <div class="map" aria-hidden="true">
+            <div class="map__water"></div>
+            <div class="map__road map__road--h1"></div>
+            <div class="map__road map__road--h2"></div>
+            <div class="map__road map__road--v1"></div>
+            <div class="map__road map__road--v2"></div>
+            <div class="map__highway"></div>
+            <div class="cluster" style="left: 70px; top: 60px; width: 56px; height: 56px; font-size: 14px; --delay: 0s">
+              <span class="dot" style="width: 40px; height: 40px">24</span>
+              <span class="ring"></span>
+            </div>
+            <div class="cluster" style="left: 300px; top: 300px; width: 48px; height: 48px; font-size: 13px; --delay: 0.3s">
+              <span class="dot" style="width: 34px; height: 34px">9</span>
+              <span class="ring"></span>
+            </div>
+            <div class="cluster" style="left: 470px; top: 90px; width: 44px; height: 44px; font-size: 12px; --delay: 0.6s">
+              <span class="dot" style="width: 30px; height: 30px">5</span>
+              <span class="ring"></span>
+            </div>
+            <div class="pin-shadow"></div>
+            <svg class="pin" width="30" height="40" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 31s10-9.5 10-18A10 10 0 0 0 2 13c0 8.5 10 18 10 18z" fill="#E2712A"/><circle cx="12" cy="13" r="4" fill="#fff"/></svg>
+            <div class="map__popup">
+              <h3>Route 29 North</h3>
+              <p>Digital billboard · 14 × 48 ft</p>
+              <span class="map__chip">AVAILABLE</span>
+            </div>
+          </div>
+        </figure>
+        <div class="geo__copy">
+          <p class="eyebrow">Geo-Locator · app.geo.myobserver.io</p>
+          <h2>Put every location you manage on one map.</h2>
+          <p class="geo__lead">Billboards, stores, job sites, listings: any kind of location. Customers search and filter it; your team keeps it current from the field.</p>
+          <ul class="geo__checks">
+            <li>
+              <svg class="geo__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Clusters, search and filters.</strong> Thousands of pins stay readable at any zoom.</span>
+            </li>
+            <li>
+              <svg class="geo__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Popup cards.</strong> Show the details that matter for each location.</span>
+            </li>
+            <li>
+              <svg class="geo__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Teams with field contributors.</strong> Let people on the ground add and update locations.</span>
+            </li>
+          </ul>
+          <div class="geo__actions">
+            <a class="btn btn-primary" href="https://app.geo.myobserver.io">Open Geo-Locator</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="wordpress"></section>
     <section id="updates"></section>
   </main>
