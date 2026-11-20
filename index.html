@@ -50,7 +50,61 @@
         <nav id="apps" aria-label="MyObserver apps" class="hero__apps"></nav>
       </div>
     </section>
-    <section id="voice"></section>
+    <section id="voice" class="voice">
+      <div class="container voice__inner">
+        <div class="voice__copy">
+          <p class="eyebrow">Voice AI · scripts.myobserver.io</p>
+          <h2>An AI agent that answers the phone and books the appointment.</h2>
+          <p class="voice__lead">Give it your business knowledge and a phone number. It handles inbound calls, runs outbound campaigns, and puts bookings straight on your calendar.</p>
+          <ul class="voice__checks">
+            <li>
+              <svg class="voice__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Knowledge base.</strong> Upload documents so the agent answers from what your business actually offers.</span>
+            </li>
+            <li>
+              <svg class="voice__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Calendar booking.</strong> Works with Cal.com, Google Calendar and Microsoft Outlook.</span>
+            </li>
+            <li>
+              <svg class="voice__check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+              <span><strong>Responsible outbound.</strong> Consent checks on contact lists, automatic opt-outs, and AI disclosure on every call.</span>
+            </li>
+          </ul>
+          <div class="voice__actions">
+            <a class="btn btn-primary" href="https://scripts.myobserver.io">Start free trial</a>
+            <span class="voice__note">30 free minutes over 14 days</span>
+          </div>
+        </div>
+        <figure id="voice-preview" class="voice-preview" aria-label="Voice AI call preview">
+          <div class="voice-preview__header">
+            <span class="voice-preview__status">
+              <span class="voice-preview__dot" aria-hidden="true"></span>
+              Live call · Inbound
+            </span>
+            <span class="voice-preview__timer">02:14</span>
+          </div>
+          <div class="meter" aria-hidden="true"></div>
+          <div class="voice-preview__transcript">
+            <div class="voice-preview__line">
+              <span class="voice-preview__label">CALLER</span>
+              <p>Hi, do you have anything open Thursday afternoon?</p>
+            </div>
+            <div class="voice-preview__line">
+              <span class="voice-preview__label voice-preview__label--agent">AGENT</span>
+              <p>I have 2:30 or 4:00 on Thursday. Which works better for you?</p>
+            </div>
+            <div class="voice-preview__line">
+              <span class="voice-preview__label">CALLER</span>
+              <p>2:30, please.</p>
+            </div>
+          </div>
+          <div class="voice-preview__booking">
+            <svg class="voice-preview__calendar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+            <span>Booked · Thursday 2:30 PM · added to Google Calendar</span>
+          </div>
+        </figure>
+      </div>
+    </section>
     <section id="geo"></section>
     <section id="wordpress"></section>
     <section id="updates"></section>

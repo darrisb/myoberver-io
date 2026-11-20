@@ -187,6 +187,50 @@ check("assets/css/site.css .app-list has the looping auto-scroll rules", () => {
   for (const decl of decls) throwIf(!block.includes(decl), `.app-list is missing "${decl}"`);
 });
 
+// --- MT-005: Voice AI section with call preview
+check('index.html has <figure id="voice-preview" aria-label="Voice AI call preview">', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<figure[^>]*id="voice-preview"[^>]*aria-label="Voice AI call preview"/.test(html),
+    'missing <figure id="voice-preview" aria-label="Voice AI call preview">',
+  );
+});
+
+check('index.html voice meter container is <div class="meter" aria-hidden="true">', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<div[^>]*class="meter"[^>]*aria-hidden="true"/.test(html),
+    'missing <div class="meter" aria-hidden="true">',
+  );
+});
+
+check("index.html voice section has the exact h2 copy", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !html.includes("<h2>An AI agent that answers the phone and books the appointment.</h2>"),
+    "missing voice section <h2>An AI agent that answers the phone and books the appointment.</h2>",
+  );
+});
+
+check("index.html voice section has trial link to https://scripts.myobserver.io", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<a[^>]*href="https:\/\/scripts\.myobserver\.io"[^>]*>Start free trial<\/a>/.test(html),
+    'missing <a href="https://scripts.myobserver.io">Start free trial</a>',
+  );
+});
+
+check("assets/js/voice.js exists and exports buildMeter()", () => {
+  const src = read("assets/js/voice.js");
+  throwIf(!exportedFn(src, "buildMeter"), "missing export of buildMeter()");
+});
+
+check("assets/js/main.js builds the voice meter", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./voice.js"'), 'missing import from "./voice.js"');
+  throwIf(!src.includes("buildMeter("), "missing buildMeter() call");
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
