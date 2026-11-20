@@ -63,7 +63,9 @@ function makeIcon(def, size = 24) {
   svg.setAttribute("width", String(size));
   svg.setAttribute("height", String(size));
   svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", def.stroke);
+  // Inline style, not a presentation attribute: var() tokens are only
+  // valid in CSS, so a stroke="var(--x)" attribute would be ignored.
+  svg.style.stroke = def.stroke;
   svg.setAttribute("stroke-width", "2");
   svg.setAttribute("stroke-linecap", "round");
   svg.setAttribute("stroke-linejoin", "round");
@@ -131,12 +133,14 @@ export function renderAppLauncher(navEl, apps) {
   const header = makeEl("div", "app-launcher__header");
   header.appendChild(makeEl("span", "app-launcher__title", "Apps"));
   header.appendChild(makeEl("span", "app-launcher__domain", "*.myobserver.io"));
-  navEl.appendChild(header);
 
   const list = makeEl("div", "app-list");
   for (const app of Array.isArray(apps) ? apps : []) {
     list.appendChild(createAppRow(app));
   }
   if (list.children.length === 0) list.hidden = true;
-  navEl.appendChild(list);
+
+  // replaceChildren (not appendChild) so a re-render replaces the panel
+  // content instead of duplicating header/list.
+  navEl.replaceChildren(header, list);
 }

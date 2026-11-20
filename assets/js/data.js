@@ -8,7 +8,8 @@ function isValidApp(app) {
     typeof app.name === "string" &&
     app.name.trim() !== "" &&
     typeof app.url === "string" &&
-    app.url.trim() !== ""
+    // Only allow http(s) and in-page # fragment links — never javascript: etc.
+    /^(?:https?:\/\/|#)/.test(app.url.trim())
   );
 }
 
