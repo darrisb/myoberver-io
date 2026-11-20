@@ -8,7 +8,8 @@
 //
 // Pauses while the pointer is over the container, while an element inside
 // it has focus (focusin/focusout), and after a touch (resumes 3s after
-// touchend). Stops while the document is hidden, resumes when visible.
+// touchend or touchcancel). Stops while the document is hidden, resumes
+// when visible.
 // Never runs when prefers-reduced-motion: reduce matches.
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -65,6 +66,9 @@ export function createLoopScroller(container, options = {}) {
   };
 
   const tick = () => {
+    // Guard against ticks triggered while stopped (e.g. by the window
+    // resize listener, which stays registered until destroy()).
+    if (!desired) return;
     if (
       document.hidden ||
       hoverPaused ||
@@ -112,6 +116,10 @@ export function createLoopScroller(container, options = {}) {
     target === container || container.contains(target);
 
   const onMouseEnter = () => {
+    // A tap synthesizes mouseenter after touchend, and on a touch-only
+    // device no matching mouseleave ever arrives. Ignore hover while a
+    // touch pause is active (or its resume timer is pending).
+    if (touchPaused || touchResumeTimer !== null) return;
     hoverPaused = true;
   };
   const onMouseLeave = () => {
@@ -158,6 +166,9 @@ export function createLoopScroller(container, options = {}) {
   container.addEventListener("focusout", onFocusOut);
   container.addEventListener("touchstart", onTouchStart, { passive: true });
   container.addEventListener("touchend", onTouchEnd, { passive: true });
+  // A swipe that turns into a native scroll cancels the touch; schedule
+  // the same resume as touchend so the loop does not stay paused forever.
+  container.addEventListener("touchcancel", onTouchEnd, { passive: true });
   reducedMotion.addEventListener("change", onReducedMotionChange);
   window.addEventListener("resize", onResize);
 
@@ -170,6 +181,7 @@ export function createLoopScroller(container, options = {}) {
     container.removeEventListener("focusout", onFocusOut);
     container.removeEventListener("touchstart", onTouchStart);
     container.removeEventListener("touchend", onTouchEnd);
+    container.removeEventListener("touchcancel", onTouchEnd);
     reducedMotion.removeEventListener("change", onReducedMotionChange);
     window.removeEventListener("resize", onResize);
   };

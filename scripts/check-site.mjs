@@ -166,6 +166,13 @@ check("assets/js/apps.js applies the loop scroller to the app list", () => {
   throwIf(!src.includes("createLoopScroller("), "missing createLoopScroller() call");
 });
 
+check("assets/js/loop-scroll.js resumes after touchcancel and honors stop() in tick()", () => {
+  const src = read("assets/js/loop-scroll.js");
+  throwIf(!/addEventListener\("touchcancel"/.test(src), "missing addEventListener(\"touchcancel\")");
+  throwIf(!/removeEventListener\("touchcancel"/.test(src), "missing removeEventListener(\"touchcancel\") in destroy()");
+  throwIf(!src.includes("!desired"), "tick() does not check `desired`, so resize ticks run after stop()");
+});
+
 check("assets/css/site.css .app-list has the looping auto-scroll rules", () => {
   const css = read("assets/css/site.css");
   const rule = css.match(/\.app-list\s*\{[^}]*\}/);
