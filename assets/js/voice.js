@@ -10,9 +10,10 @@ const BAR_COUNT = 40;
  * Bar i gets height (18 + round(|sin(i*0.7) * cos(i*0.23)| * 82))%,
  * --d = (0.7 + ((i*37) % 9)/10)s and --delay = (((i*53) % 7)/20)s.
  * @param {HTMLElement} container the .meter element (aria-hidden)
- * @returns {HTMLElement} the filled container
+ * @returns {HTMLElement} the filled container (or null if container is missing)
  */
 export function buildMeter(container) {
+  if (!container) return container;
   container.textContent = "";
   for (let i = 0; i < BAR_COUNT; i++) {
     const bar = document.createElement("span");
