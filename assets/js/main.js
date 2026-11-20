@@ -1,8 +1,9 @@
 // assets/js/main.js — site entry module (ES module).
-import { loadApps } from "./data.js";
+import { loadApps, loadPlugins } from "./data.js";
 import { renderAppLauncher } from "./apps.js";
 import { buildMeter } from "./voice.js";
 import { initPreviewAnimations } from "./animations.js";
+import { renderPlugins } from "./plugins.js";
 
 // MT-003: hero app launcher — list from data/apps.json.
 // On load failure loadApps() resolves to [] and renderAppLauncher
@@ -22,3 +23,10 @@ buildMeter(document.querySelector("#voice-preview .meter"));
 // (IntersectionObserver, finite keyframes, never under
 // prefers-reduced-motion: reduce).
 initPreviewAnimations();
+
+// MT-008: WordPress plugin cards — row from data/plugins.json.
+// On load failure loadPlugins() resolves to [] and renderPlugins
+// hides the row. The sideways auto-scroll loop lands in a later task.
+loadPlugins().then((plugins) => {
+  renderPlugins(document.getElementById("plugin-row"), plugins);
+});

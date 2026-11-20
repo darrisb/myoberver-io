@@ -367,6 +367,65 @@ check("assets/css/site.css animation rules are finite (no infinite iteration cou
   }
 });
 
+// --- MT-008: WordPress section with plugin cards from data/plugins.json
+check('index.html has #plugin-row with role=region, aria-label="WordPress plugins" and tabindex="0"', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<div[^>]*id="plugin-row"[^>]*class="plugin-row"[^>]*role="region"[^>]*aria-label="WordPress plugins"[^>]*tabindex="0"/.test(html),
+    "missing <div id=\"plugin-row\" class=\"plugin-row\" role=\"region\" aria-label=\"WordPress plugins\" tabindex=\"0\">",
+  );
+});
+
+check("index.html wordpress section has the exact eyebrow and h2 copy", () => {
+  throwIf(!html, "index.html not available");
+  const section = (html.match(/<section[^>]*id="wordpress"[\s\S]*?<\/section>/) || [""])[0];
+  throwIf(!section, "missing <section id=\"wordpress\"> block");
+  throwIf(!section.includes("For WordPress"), "missing \"For WordPress\" eyebrow");
+  throwIf(
+    !section.includes("<h2>Free plugins on WordPress.org.</h2>"),
+    "missing wordpress section <h2>Free plugins on WordPress.org.</h2>",
+  );
+});
+
+check("assets/js/plugins.js exists and exports renderPlugins()", () => {
+  const src = read("assets/js/plugins.js");
+  throwIf(!exportedFn(src, "renderPlugins"), "missing export of renderPlugins()");
+  throwIf(!src.includes("createElement"), "renderPlugins must build cards with createElement");
+});
+
+check("assets/js/main.js loads plugins and renders the row", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./plugins.js"'), 'missing import from "./plugins.js"');
+  throwIf(!src.includes("loadPlugins("), "missing loadPlugins() call");
+  throwIf(!src.includes("renderPlugins("), "missing renderPlugins() call");
+  throwIf(
+    !src.includes('getElementById("plugin-row")'),
+    'missing render target getElementById("plugin-row")',
+  );
+});
+
+check("assets/css/site.css .plugin-row is a horizontally scrollable row and cards are fixed-width 340px (85% under 420px)", () => {
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.plugin-row\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .plugin-row rule");
+  for (const decl of [
+    "display: flex",
+    "gap: 20px",
+    "overflow-x: auto",
+    "scrollbar-width: none",
+    "overscroll-behavior-x: contain",
+  ]) {
+    throwIf(!rule[0].includes(decl), `.plugin-row is missing "${decl}"`);
+  }
+  const card = css.match(/\.plugin-card\s*\{[^}]*\}/);
+  throwIf(!card, "missing .plugin-card rule");
+  throwIf(!card[0].includes("flex: 0 0 340px"), '.plugin-card is missing "flex: 0 0 340px"');
+  throwIf(
+    !/@media\s*\(max-width:\s*419px\)\s*\{[\s\S]*?flex-basis:\s*85%/.test(css),
+    "missing @media (max-width: 419px) card flex-basis: 85%",
+  );
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
