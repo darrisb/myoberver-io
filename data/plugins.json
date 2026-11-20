@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    {
+      "name": "Runtime Error Monitor",
+      "description": "Groups recurring PHP and WordPress errors and shows them on a daily heatmap.",
+      "url": "https://wordpress.org/plugins/myobserver-runtime-error-monitor/",
+      "status": "v3.0.3",
+      "live": true
+    },
+    {
+      "name": "AI Shopping Assistant for WooCommerce",
+      "description": "A storefront chat that answers shoppers from your own products and documents.",
+      "url": "https://wordpress.org/plugins/my-observer-rag-chat-assistant-for-woocommerce/",
+      "status": "v2.1.0",
+      "live": true
+    },
+    {
+      "name": "Network Monitor",
+      "description": "Watches your site's network activity. Pairs with the Error Monitor.",
+      "url": "",
+      "status": "Coming soon",
+      "live": false
+    }
+  ]
+}

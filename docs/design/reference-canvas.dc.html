@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MyObserver — Apps for growing businesses</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4F6F8}
+a{color:#1F3FD6}a:hover{color:#142C9E}
+@keyframes mo-eq{0%{transform:scaleY(1);background:#8EE0B4}20%{transform:scaleY(.35);background:#F6B94F}45%{transform:scaleY(1.3);background:#7FB3FF}70%{transform:scaleY(.55);background:#E2712A}100%{transform:scaleY(1);background:#8EE0B4}}
+@keyframes mo-bounce{0%{transform:translateY(-60px)}30%{transform:translateY(0) scaleY(.85)}45%{transform:translateY(-26px) scaleY(1)}60%{transform:translateY(0) scaleY(.9)}72%{transform:translateY(-10px)}84%{transform:translateY(0) scaleY(.96)}92%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes mo-shadow{0%{transform:scale(.4);opacity:.2}30%{transform:scale(1.1);opacity:.5}45%{transform:scale(.7);opacity:.3}60%{transform:scale(1.05);opacity:.5}72%{transform:scale(.85);opacity:.4}100%{transform:scale(1);opacity:.45}}
+@keyframes mo-ring{0%{transform:scale(.8);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+@keyframes mo-blink{0%,100%{background:#1F4BFF}50%{background:#E2712A}}
+</style>
+</helmet>
+<div style="width: 100%; background: #F4F6F8; color: #0E1726; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<!-- NAV -->
+<header style="border-bottom: 1px solid #DCE2EA; background: #F4F6F8">
+<nav aria-label="Main" style="max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0E1726">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="#0E1726"></rect><path d="M6 16h5l2.5-6 5 12 2.5-6h5" stroke="#F6B94F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.01em">MyObserver</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px; font-weight: 500">
+<a href="#apps" style="color: #2B3648; text-decoration: none">Apps</a>
+<a href="#voice" style="color: #2B3648; text-decoration: none">Voice AI</a>
+<a href="#geo" style="color: #2B3648; text-decoration: none">Geo-Locator</a>
+<a href="#wordpress" style="color: #2B3648; text-decoration: none">WordPress</a>
+<a href="#apps" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 8px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">Open an app</a>
+</div>
+</nav>
+</header>
+
+<!-- HERO + LAUNCHER -->
+<section id="top" style="max-width: 1200px; margin: 0 auto; padding: 88px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #8A4A00">myobserver.io</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(40px, 5.2vw, 64px); line-height: 1.04; letter-spacing: -0.03em">Focused apps that each do one job well.</h1>
+<p style="margin: 0; font-size: 19px; color: #3D4A5C; max-width: 32em">MyObserver builds hosted tools for businesses: AI agents that answer and make your calls, interactive maps of your locations, and more on the way. Pick an app and get to work.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#apps" style="display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 10px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">
+Browse the apps
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<a href="#updates" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 10px; border: 1px solid #C5CEDA; background: #FFFFFF; color: #0E1726; text-decoration: none; font-weight: 600">Get launch updates</a>
+</div>
+</div>
+
+<!-- Launcher panel -->
+<nav id="apps" aria-label="MyObserver apps" style="flex: 1 1 480px; min-width: 0; background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 18px; box-shadow: 0 24px 48px -24px rgba(14,23,38,0.25); overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; border-bottom: 1px solid #E6EAF0">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px">Apps</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #556274">*.myobserver.io</span>
+</div>
+<div id="mo-app-list" ref="{{listRef}}" onMouseEnter="{{pause}}" onMouseLeave="{{resume}}" onFocus="{{pause}}" onBlur="{{resume}}" onTouchStart="{{pause}}" style="display: flex; flex-direction: column; max-height: {{listMax}}; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none">
+<sc-for list="{{apps}}" as="app" hint-placeholder-count="4">
+<a href="{{app.url}}" style="flex: none; display: flex; align-items: center; gap: 16px; height: 88px; box-sizing: border-box; padding: 0 22px; border-bottom: 1px solid #EEF1F5; text-decoration: none; color: #0E1726; background: {{app.bg}}">
+<sc-if value="{{app.isMore}}" hint-placeholder-val="{{ false }}">
+<span style="flex: none; width: 48px; height: 48px; border-radius: 12px; border: 1.5px dashed #9AA6B6; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#556274" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+</span>
+</sc-if>
+<sc-if value="{{app.isApp}}" hint-placeholder-val="{{ true }}">
+<span style="flex: none; width: 48px; height: 48px; border-radius: 12px; background: #0E1726; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{app.iconPhone}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8EE0B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></sc-if>
+<sc-if value="{{app.iconPin}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7FB3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></sc-if>
+<sc-if value="{{app.iconOther}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9D5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></sc-if>
+<sc-if value="{{app.iconPlug}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F6B94F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6M8 4v4M16 4v4M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"></path></svg></sc-if>
+</span>
+</sc-if>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px; color: {{app.nameColor}}">{{app.name}}</span>
+<span style="font-size: 14px; color: #3D4A5C">{{app.desc}}</span>
+</span>
+<sc-if value="{{app.isSoon}}" hint-placeholder-val="{{ false }}"><span style="flex: none; padding: 3px 10px; border-radius: 999px; background: #E6EBFF; color: #1E3399; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{app.status}}</span></sc-if>
+<sc-if value="{{app.isLive}}" hint-placeholder-val="{{ false }}"><span style="flex: none; padding: 3px 10px; border-radius: 999px; background: #DDF3E6; color: #11643A; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{app.status}}</span></sc-if>
+<sc-if value="{{app.isApp}}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#556274" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></sc-if>
+</a>
+</sc-for>
+</div>
+</nav>
+</section>
+
+<!-- VOICE AI -->
+<section id="voice" style="background: #FFFFFF; border-top: 1px solid #DCE2EA; border-bottom: 1px solid #DCE2EA">
+<div style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #11643A">Voice AI · scripts.myobserver.io</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em">An AI agent that answers the phone and books the appointment.</h2>
+<p style="margin: 0; font-size: 18px; color: #3D4A5C">Give it your business knowledge and a phone number. It handles inbound calls, runs outbound campaigns, and puts bookings straight on your calendar.</p>
+<ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E9E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Knowledge base.</strong> Upload documents so the agent answers from what your business actually offers.</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E9E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Calendar booking.</strong> Works with Cal.com, Google Calendar and Microsoft Outlook.</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1E9E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Responsible outbound.</strong> Consent checks on contact lists, automatic opt-outs, and AI disclosure on every call.</span></li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 12px">
+<a href="https://scripts.myobserver.io" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 10px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">Start free trial</a>
+<span style="font-size: 14px; color: #3D4A5C">30 free minutes over 14 days</span>
+</div>
+</div>
+
+<figure id="mo-voice-fig" ref="{{voiceRef}}" onMouseEnter="{{replayVoice}}" class="{{voiceClass}}" aria-label="Voice AI call preview" style="flex: 1 1 460px; min-width: 0; margin: 0; background: #0E1726; color: #F4F6F8; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 48px -24px rgba(14,23,38,0.35)">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 22px; border-bottom: 1px solid #22304A">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #8EE0B4"></span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600">Live call · Inbound</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #B8C2D1">02:14</span>
+</div>
+<div style="padding: 18px 22px 8px; display: flex; align-items: flex-end; gap: 4px; height: 56px" aria-hidden="true">
+<sc-for list="{{wave}}" as="w" hint-placeholder-count="40"><span style="flex: 1 1 0; border-radius: 2px; background: #8EE0B4; transform-origin: 50% 100%; height: {{w.h}}; animation: {{w.anim}}"></span></sc-for>
+</div>
+<div style="padding: 12px 22px 22px; display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9FB0C6">CALLER</span><span>Hi, do you have anything open Thursday afternoon?</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8EE0B4">AGENT</span><span>I have 2:30 or 4:00 on Thursday. Which works better for you?</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9FB0C6">CALLER</span><span>2:30, please.</span></div>
+<div style="margin-top: 6px; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #172235; border: 1px solid #2A3A55">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F6B94F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+<span style="font-size: 14px">Booked · Thursday 2:30 PM · added to Google Calendar</span>
+</div>
+</div>
+</figure>
+</div>
+</section>
+
+<!-- GEO-LOCATOR -->
+<section id="geo" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px; display: flex; flex-wrap: wrap-reverse; gap: 64px; align-items: center">
+<figure id="mo-geo-fig" ref="{{geoRef}}" onMouseEnter="{{replayGeo}}" class="{{geoClass}}" aria-label="Geo-Locator map preview" style="flex: 1 1 520px; min-width: 0; margin: 0; background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 18px; overflow: hidden; box-shadow: 0 24px 48px -24px rgba(14,23,38,0.25)">
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 14px 18px; border-bottom: 1px solid #E6EAF0">
+<div style="flex: 1 1 180px; display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #DCE2EA; border-radius: 8px; color: #556274; font-size: 14px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Search locations
+</div>
+<span style="padding: 6px 12px; border-radius: 999px; background: #0E1726; color: #FFFFFF; font-size: 13px">All types</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #EEF1F5; color: #2B3648; font-size: 13px">Available</span>
+<span style="padding: 6px 12px; border-radius: 999px; background: #EEF1F5; color: #2B3648; font-size: 13px">Region</span>
+</div>
+<div style="position: relative; height: 400px; background: #E9EEF2; overflow: hidden" aria-hidden="true">
+<div style="position: absolute; right: -60px; top: -40px; width: 320px; height: 260px; border-radius: 50%; background: #CFE0EE"></div>
+<div style="position: absolute; left: 0; right: 0; top: 140px; height: 10px; background: #FFFFFF"></div>
+<div style="position: absolute; left: 0; right: 0; top: 290px; height: 6px; background: #FFFFFF"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 180px; width: 10px; background: #FFFFFF"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 400px; width: 6px; background: #FFFFFF"></div>
+<div style="position: absolute; left: -40px; top: 220px; width: 700px; height: 8px; background: #F7D9A0; transform: rotate(-14deg)"></div>
+<div style="position: absolute; left: 70px; top: 60px; width: 56px; height: 56px; border-radius: 50%; background: rgba(31,75,255,0.18); display: flex; align-items: center; justify-content: center"><span style="position: absolute; inset: 0; border-radius: 50%; border: 2px solid #1F4BFF; opacity: 0; animation: {{ring0}}"></span><span style="position: relative; animation: {{dot0}}; width: 40px; height: 40px; border-radius: 50%; background: #1F4BFF; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center">24</span></div>
+<div style="position: absolute; left: 300px; top: 300px; width: 48px; height: 48px; border-radius: 50%; background: rgba(31,75,255,0.18); display: flex; align-items: center; justify-content: center"><span style="position: absolute; inset: 0; border-radius: 50%; border: 2px solid #1F4BFF; opacity: 0; animation: {{ring1}}"></span><span style="position: relative; animation: {{dot1}}; width: 34px; height: 34px; border-radius: 50%; background: #1F4BFF; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center">9</span></div>
+<div style="position: absolute; left: 470px; top: 90px; width: 44px; height: 44px; border-radius: 50%; background: rgba(31,75,255,0.18); display: flex; align-items: center; justify-content: center"><span style="position: absolute; inset: 0; border-radius: 50%; border: 2px solid #1F4BFF; opacity: 0; animation: {{ring2}}"></span><span style="position: relative; animation: {{dot2}}; width: 30px; height: 30px; border-radius: 50%; background: #1F4BFF; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center">5</span></div>
+<span style="position: absolute; left: 263px; top: 192px; width: 20px; height: 6px; border-radius: 50%; background: rgba(14,23,38,0.45); animation: {{shadowAnim}}"></span><svg width="30" height="40" viewBox="0 0 24 32" style="position: absolute; left: 258px; top: 156px; transform-origin: 50% 100%; animation: {{pinAnim}}"><path d="M12 31s10-9.5 10-18A10 10 0 0 0 2 13c0 8.5 10 18 10 18z" fill="#E2712A"></path><circle cx="12" cy="13" r="4" fill="#FFFFFF"></circle></svg>
+<div style="position: absolute; left: 296px; top: 110px; width: 220px; padding: 14px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 12px 28px -8px rgba(14,23,38,0.3); display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; color: #0E1726">Route 29 North</span>
+<span style="font-size: 13px; color: #3D4A5C">Digital billboard · 14 × 48 ft</span>
+<span style="margin-top: 4px; align-self: flex-start; padding: 2px 8px; border-radius: 5px; background: #DDF3E6; color: #11643A; font-family: 'JetBrains Mono', monospace; font-size: 12px">AVAILABLE</span>
+</div>
+</div>
+</figure>
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #1E3399">Geo-Locator · app.geo.myobserver.io</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em">Put every location you manage on one map.</h2>
+<p style="margin: 0; font-size: 18px; color: #3D4A5C">Billboards, stores, job sites, listings: any kind of location. Customers search and filter it; your team keeps it current from the field.</p>
+<ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4BFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Clusters, search and filters.</strong> Thousands of pins stay readable at any zoom.</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4BFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Popup cards.</strong> Show the details that matter for each location.</span></li>
+<li style="display: flex; gap: 12px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4BFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l5 5 9-10"></path></svg><span><strong>Teams with field contributors.</strong> Let people on the ground add and update locations.</span></li>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px">
+<a href="https://app.geo.myobserver.io" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 10px; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600">Open Geo-Locator</a>
+</div>
+</div>
+</section>
+
+<!-- WORDPRESS -->
+<section id="wordpress" style="background: #0E1726; color: #F4F6F8">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #F6B94F">For WordPress</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -0.02em">Free plugins on WordPress.org.</h2>
+</div>
+<p style="flex: 1 1 360px; min-width: 0; margin: 0; color: #B8C2D1">Lightweight plugins that run on your own server. Install from Plugins › Add New in wp-admin.</p>
+</div>
+<div id="mo-wp-row" onMouseEnter="{{pauseWp}}" onMouseLeave="{{resumeWp}}" onFocus="{{pauseWp}}" onBlur="{{resumeWp}}" onTouchStart="{{pauseWp}}" style="display: flex; gap: 20px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding-bottom: 4px">
+<sc-for list="{{plugins}}" as="pl" hint-placeholder-count="3">
+<a href="{{pl.url}}" style="flex: 0 0 340px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 14px; background: {{pl.bg}}; border: 1px {{pl.borderStyle}} {{pl.borderColor}}; text-decoration: none; color: #F4F6F8">
+<sc-if value="{{pl.isLive}}" hint-placeholder-val="{{ true }}"><span style="align-self: flex-start; padding: 3px 10px; border-radius: 999px; background: #1C4A33; color: #BFF0D4; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{pl.status}}</span></sc-if>
+<sc-if value="{{pl.isSoon}}" hint-placeholder-val="{{ false }}"><span style="align-self: flex-start; padding: 3px 10px; border-radius: 999px; background: #1E2C4A; color: #C9D5FF; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{pl.status}}</span></sc-if>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px">{{pl.name}}</span>
+<span style="color: #B8C2D1; font-size: 15px">{{pl.desc}}</span>
+<sc-if value="{{pl.hasLink}}" hint-placeholder-val="{{ true }}"><span style="margin-top: auto; padding-top: 8px; color: #F6B94F; font-weight: 600; font-size: 15px">View plugin →</span></sc-if>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+
+<!-- UPDATES -->
+<section id="updates" style="max-width: 1200px; margin: 0 auto; padding: 112px 24px">
+<div style="padding: 56px 48px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DCE2EA; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -0.02em">Hear when a new app opens.</h2>
+<p style="margin: 0; color: #3D4A5C; font-size: 17px">One email per launch. Nothing else.</p>
+</div>
+<form style="flex: 1 1 380px; min-width: 0; display: flex; flex-wrap: wrap; gap: 10px">
+<label for="updates-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
+<input id="updates-email" type="email" placeholder="you@company.com" style="flex: 1 1 220px; min-width: 0; min-height: 52px; padding: 0 16px; border: 1px solid #C5CEDA; border-radius: 10px; background: #FFFFFF; color: #0E1726; font: inherit">
+<button type="button" style="flex: none; min-height: 52px; padding: 0 24px; border: 0; border-radius: 10px; background: #0E1726; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Notify me</button>
+</form>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer style="border-top: 1px solid #DCE2EA">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 56px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; font-size: 14px; color: #3D4A5C">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="#0E1726"></rect><path d="M6 16h5l2.5-6 5 12 2.5-6h5" stroke="#F6B94F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #0E1726; font-size: 16px">MyObserver</span>
+</div>
+<span>© 2026 MyObserver</span>
+</div>
+<nav aria-label="Apps" style="flex: 0 1 220px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #556274">Apps</span>
+<sc-for list="{{footerApps}}" as="fa" hint-placeholder-count="3"><a href="{{fa.url}}" style="color: #2B3648">{{fa.name}}</a></sc-for>
+</nav>
+<nav aria-label="Company" style="flex: 0 1 220px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #556274">Company</span>
+<a href="https://github.com/darrisb" style="color: #2B3648">GitHub</a>
+<a href="#privacy" style="color: #2B3648">Privacy</a>
+<a href="#terms" style="color: #2B3648">Terms</a>
+<a href="mailto:[YOUR CONTACT EMAIL]" style="color: #2B3648">Contact</a>
+</nav>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F4BFF","options":["#1F4BFF","#0E7C5A","#6D28D9","#C2410C"]},"rowsShown":{"editor":"int","default":3,"min":2,"max":6,"section":"App list"},"$preview":{"width":1440,"height":4700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    // Fallback copy of apps.json, used until (or if) that file loads.
+    this.state = { shift: 0, apps: [
+      { name: 'Voice AI', description: 'AI phone agents for inbound and outbound calls', url: 'https://scripts.myobserver.io', status: 'Launching soon', live: false, icon: 'phone' },
+      { name: 'Geo-Locator', description: 'Interactive maps of every location you manage', url: 'https://app.geo.myobserver.io', status: 'Launching soon', live: false, icon: 'pin' },
+      { name: 'WordPress plugins', description: 'Free plugins for site monitoring and WooCommerce', url: '#wordpress', status: 'Available', live: true, icon: 'plug' },
+      { name: 'More apps on the way', description: 'Get an email when the next one opens', url: '#updates', icon: 'more' }
+    ], plugins: [
+      { name: 'Runtime Error Monitor', description: 'Groups recurring PHP and WordPress errors and shows them on a daily heatmap.', url: 'https://wordpress.org/plugins/myobserver-runtime-error-monitor/', status: 'v3.0.3', live: true },
+      { name: 'AI Shopping Assistant for WooCommerce', description: 'A storefront chat that answers shoppers from your own products and documents.', url: 'https://wordpress.org/plugins/my-observer-rag-chat-assistant-for-woocommerce/', status: 'v2.1.0', live: true },
+      { name: 'Network Monitor', description: "Watches your site's network activity. Pairs with the Error Monitor.", url: '', status: 'Coming soon', live: false }
+    ], wpShift: 0, voiceOn: false, geoOn: false };
+    var self = this;
+    this.listRef = function (el) { self.listEl = el; };
+    this.voiceRef = function (el) { self.voiceEl = el; };
+    this.geoRef = function (el) { self.geoEl = el; };
+    this.pause = function () { self.paused = true; };
+    this.resume = function () { self.paused = false; };
+    this.pauseWp = function () { self.wpPaused = true; };
+    this.resumeWp = function () { self.wpPaused = false; };
+    this.replayVoice = function () { self.replay('voiceOn'); };
+    this.replayGeo = function () { self.replay('geoOn'); };
+  }
+  replay(key) {
+    var self = this;
+    var now = Date.now();
+    if (self['last_' + key] && now - self['last_' + key] < 2500) return;
+    self['last_' + key] = now;
+    var off = {}; off[key] = false;
+    self.setState(off);
+    setTimeout(function () { var on = {}; on[key] = true; self.setState(on); }, 60);
+  }
+  el(id, cached) {
+    return cached || (typeof document !== 'undefined' ? document.getElementById(id) : null);
+  }
+  componentDidMount() {
+    var self = this;
+    // 1. Load the app list from apps.json (edit that file to add or change apps).
+    fetch('./apps.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var list = data && Array.isArray(data.apps) ? data.apps.filter(function (a) { return a && a.name && a.url; }) : null;
+      if (list && list.length) self.setState({ apps: list, shift: 0 });
+    }).catch(function () {});
+    fetch('./plugins.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      var list = data && Array.isArray(data.plugins) ? data.plugins.filter(function (a) { return a && a.name; }) : null;
+      if (list && list.length) self.setState({ plugins: list, wpShift: 0 });
+    }).catch(function () {});
+
+    // 2. Play each preview's animation when it scrolls into view (again each time it comes back).
+    var voice = self.el('mo-voice-fig', self.voiceEl);
+    var geo = self.el('mo-geo-fig', self.geoEl);
+    if (typeof IntersectionObserver === 'function' && (voice || geo)) {
+      self.io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var key = e.target.id === 'mo-voice-fig' ? 'voiceOn' : 'geoOn';
+          if (e.isIntersecting) { self.replay(key); }
+          else { var off = {}; off[key] = false; self.setState(off); self['last_' + key] = 0; }
+        });
+      }, { threshold: 0.35 });
+      if (voice) self.io.observe(voice);
+      if (geo) self.io.observe(geo);
+    } else {
+      setTimeout(function () { self.setState({ voiceOn: true, geoOn: true }); }, 600);
+    }
+
+    // 3. Looping app list: scroll slowly, move the top app to the bottom.
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    self.timer = setInterval(function () {
+      self.tickWp();
+      var el = self.el('mo-app-list', self.listEl);
+      if (!el || self.paused || self.pending) return;
+      var max = el.scrollHeight - el.clientHeight;
+      if (max <= 2) return;
+      var first = el.querySelector('a');
+      var h = first ? first.offsetHeight : 88;
+      if (el.scrollTop + 1 >= h || el.scrollTop >= max - 1) {
+        self.pending = h;
+        self.setState({ shift: self.state.shift + 1 });
+        return;
+      }
+      el.scrollTop = el.scrollTop + 1;
+    }, 40);
+  }
+  tickWp() {
+    var row = this.el('mo-wp-row');
+    if (!row || this.wpPaused || this.wpPending) return;
+    var max = row.scrollWidth - row.clientWidth;
+    if (max <= 2) return;
+    var first = row.querySelector('a');
+    var w = first ? first.offsetWidth + 20 : 360;
+    if (row.scrollLeft + 1 >= w || row.scrollLeft >= max - 1) {
+      this.wpPending = w;
+      this.setState({ wpShift: this.state.wpShift + 1 });
+      return;
+    }
+    row.scrollLeft = row.scrollLeft + 1;
+  }
+  componentDidUpdate() {
+    var row = this.el('mo-wp-row');
+    if (this.wpPending && row) row.scrollLeft = Math.max(0, row.scrollLeft - this.wpPending);
+    this.wpPending = 0;
+    var list = this.el('mo-app-list', this.listEl);
+    if (this.pending && list) {
+      list.scrollTop = Math.max(0, list.scrollTop - this.pending);
+    }
+    this.pending = 0;
+  }
+  componentWillUnmount() {
+    if (this.timer) clearInterval(this.timer);
+    if (this.io) this.io.disconnect();
+  }
+  renderVals() {
+    var reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var vOn = this.state.voiceOn && !reduce;
+    var gOn = this.state.geoOn && !reduce;
+    var wave = [];
+    for (var i = 0; i < 40; i++) {
+      var h = 18 + Math.round(Math.abs(Math.sin(i * 0.7) * Math.cos(i * 0.23)) * 82);
+      wave.push({ h: h + '%', anim: vOn ? 'mo-eq ' + (0.7 + ((i * 37) % 9) / 10) + 's ease-in-out ' + (((i * 53) % 7) / 20) + 's 3' : 'none' });
+    }
+    var base = this.state.apps;
+    var n = base.length;
+    var k = n ? this.state.shift % n : 0;
+    var ordered = base.slice(k).concat(base.slice(0, k));
+    var known = { phone: 1, pin: 1, plug: 1, more: 1 };
+    var apps = ordered.map(function (a) {
+      var more = a.icon === 'more';
+      return {
+        name: a.name, desc: a.description || '', url: a.url, status: a.status || '',
+        isMore: more, isApp: !more,
+        iconPhone: a.icon === 'phone', iconPin: a.icon === 'pin', iconPlug: a.icon === 'plug', iconOther: !more && !known[a.icon],
+        isSoon: !more && !a.live && !!a.status, isLive: !!a.live && !!a.status,
+        bg: more ? '#FAFBFC' : '#FFFFFF', nameColor: more ? '#2B3648' : '#0E1726'
+      };
+    });
+    var footerApps = base.filter(function (a) { return a.icon !== 'more'; }).map(function (a) { return { name: a.name, url: a.url }; });
+    var pl = this.state.plugins;
+    var pk = pl.length ? this.state.wpShift % pl.length : 0;
+    var plugins = pl.slice(pk).concat(pl.slice(0, pk)).map(function (a) {
+      var live = !!a.live;
+      return {
+        name: a.name, desc: a.description || '', url: a.url || '#wordpress', status: a.status || '',
+        isLive: live && !!a.status, isSoon: !live && !!a.status, hasLink: !!a.url,
+        bg: live ? '#172235' : 'transparent', borderStyle: live ? 'solid' : 'dashed', borderColor: live ? '#2A3A55' : '#3A4A66'
+      };
+    });
+    var rows = this.props.rowsShown ?? 3;
+    return {
+      accent: this.props.accent ?? '#1F4BFF', wave: wave, apps: apps, footerApps: footerApps,
+      listMax: (rows * 88) + 'px',
+      voiceClass: '', geoClass: '',
+      pinAnim: gOn ? 'mo-bounce 1.6s ease-in 0.2s 1 both' : 'none',
+      shadowAnim: gOn ? 'mo-shadow 1.6s ease-in 0.2s 1 both' : 'none',
+      ring0: gOn ? 'mo-ring 0.9s ease-out 0s 4' : 'none',
+      ring1: gOn ? 'mo-ring 0.9s ease-out 0.3s 4' : 'none',
+      ring2: gOn ? 'mo-ring 0.9s ease-out 0.6s 4' : 'none',
+      dot0: gOn ? 'mo-blink 0.9s ease-in-out 0s 4' : 'none',
+      dot1: gOn ? 'mo-blink 0.9s ease-in-out 0.3s 4' : 'none',
+      dot2: gOn ? 'mo-blink 0.9s ease-in-out 0.6s 4' : 'none',
+      listRef: this.listRef, voiceRef: this.voiceRef, geoRef: this.geoRef,
+      pause: this.pause, resume: this.resume,
+      replayVoice: this.replayVoice, replayGeo: this.replayGeo,
+      plugins: plugins, pauseWp: this.pauseWp, resumeWp: this.resumeWp
+    };
+  }
+}
+</script>
+</body>
+</html>

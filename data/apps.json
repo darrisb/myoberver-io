@@ -1,0 +1,34 @@
+{
+  "apps": [
+    {
+      "name": "Voice AI",
+      "description": "AI phone agents for inbound and outbound calls",
+      "url": "https://scripts.myobserver.io",
+      "status": "Launching soon",
+      "live": false,
+      "icon": "phone"
+    },
+    {
+      "name": "Geo-Locator",
+      "description": "Interactive maps of every location you manage",
+      "url": "https://app.geo.myobserver.io",
+      "status": "Launching soon",
+      "live": false,
+      "icon": "pin"
+    },
+    {
+      "name": "WordPress plugins",
+      "description": "Free plugins for site monitoring and WooCommerce",
+      "url": "#wordpress",
+      "status": "Available",
+      "live": true,
+      "icon": "plug"
+    },
+    {
+      "name": "More apps on the way",
+      "description": "Get an email when the next one opens",
+      "url": "#updates",
+      "icon": "more"
+    }
+  ]
+}
