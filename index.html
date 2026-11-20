@@ -15,9 +15,41 @@
   <script type="module" src="assets/js/main.js"></script>
 </head>
 <body>
-  <header></header>
+  <header class="site-header">
+    <nav aria-label="Main">
+      <div class="container site-nav">
+        <a class="brand" href="#top">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="#0E1726"/><path d="M6 16h5l2.5-6 5 12 2.5-6h5" stroke="#F6B94F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="brand__wordmark">MyObserver</span>
+        </a>
+        <div class="site-nav__links">
+          <a class="site-nav__link" href="#apps">Apps</a>
+          <a class="site-nav__link" href="#voice">Voice AI</a>
+          <a class="site-nav__link" href="#geo">Geo-Locator</a>
+          <a class="site-nav__link" href="#wordpress">WordPress</a>
+          <a class="btn btn-primary btn-sm" href="#apps">Open an app</a>
+        </div>
+      </div>
+    </nav>
+  </header>
   <main>
-    <section id="top"></section>
+    <section id="top" class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="eyebrow">myobserver.io</p>
+          <h1>Focused apps that each do one job well.</h1>
+          <p class="hero__lead">MyObserver builds hosted tools for businesses: AI agents that answer and make your calls, interactive maps of your locations, and more on the way. Pick an app and get to work.</p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#apps">
+              Browse the apps
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a class="btn btn-secondary" href="#updates">Get launch updates</a>
+          </div>
+        </div>
+        <nav id="apps" aria-label="MyObserver apps" class="hero__apps"></nav>
+      </div>
+    </section>
     <section id="voice"></section>
     <section id="geo"></section>
     <section id="wordpress"></section>

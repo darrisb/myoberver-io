@@ -85,6 +85,29 @@ check('index.html has sections #top, #voice, #geo, #wordpress, #updates', () => 
   }
 });
 
+check("index.html hero has the exact h1 copy", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !html.includes("<h1>Focused apps that each do one job well.</h1>"),
+    "missing <h1>Focused apps that each do one job well.</h1>",
+  );
+});
+
+check("index.html header nav links to #apps, #voice, #geo, #wordpress", () => {
+  throwIf(!html, "index.html not available");
+  for (const id of ["apps", "voice", "geo", "wordpress"]) {
+    throwIf(!html.includes(`href="#${id}"`), `missing header nav link to #${id}`);
+  }
+});
+
+check('index.html has <nav id="apps" aria-label="MyObserver apps"> placeholder', () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<nav[^>]*id="apps"[^>]*aria-label="MyObserver apps"/.test(html),
+    'missing <nav id="apps" aria-label="MyObserver apps">',
+  );
+});
+
 check("every file referenced by index.html (css, js, favicons) exists", () => {
   throwIf(!html, "index.html not available");
   const refs = new Set();
