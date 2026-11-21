@@ -417,6 +417,12 @@ check("assets/css/site.css .plugin-row is a horizontally scrollable row and card
   ]) {
     throwIf(!rule[0].includes(decl), `.plugin-row is missing "${decl}"`);
   }
+  const hiddenRow = css.match(/\.plugin-row\[hidden\]\s*\{[^}]*\}/);
+  throwIf(!hiddenRow, "missing .plugin-row[hidden] rule");
+  throwIf(
+    !/display:\s*none/.test(hiddenRow[0]),
+    '.plugin-row[hidden] must declare "display: none" so a load-failure row is truly hidden',
+  );
   const card = css.match(/\.plugin-card\s*\{[^}]*\}/);
   throwIf(!card, "missing .plugin-card rule");
   throwIf(!card[0].includes("flex: 0 0 340px"), '.plugin-card is missing "flex: 0 0 340px"');

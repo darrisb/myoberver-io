@@ -877,6 +877,10 @@ h2 {
   display: none;
 }
 
+.plugin-row[hidden] {
+  display: none;
+}
+
 .plugin-card {
   flex: 0 0 340px;
   display: flex;
