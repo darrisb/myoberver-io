@@ -556,12 +556,12 @@ check("index.html has Open Graph meta tags (og:title, og:description, og:type=we
   );
 });
 
-check("index.html has no TODO strings other than the contact-email and email-service TODOs", () => {
+check("index.html has no TODO strings other than the contact-email TODO", () => {
   throwIf(!html, "index.html not available");
   const todos = html.match(/TODO[^\n<>]*/g) || [];
   todos.forEach((todo) => {
     throwIf(
-      !/contact email/.test(todo) && !/email service/.test(todo),
+      !/TODO:\s*real contact email/.test(todo),
       `unexpected TODO in index.html: "${todo.trim()}"`,
     );
   });
@@ -585,13 +585,17 @@ check("assets/css/site.css interactive elements are at least 44px tall and :focu
   };
   for (const selector of [".btn", ".site-nav__link", ".brand", ".footer__links a"]) {
     throwIf(
-      !findRule(selector).includes("min-height: 44px"),
+      !/min-height:\s*44px/.test(findRule(selector)),
       `${selector} is missing "min-height: 44px"`,
     );
   }
   throwIf(
-    !/:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--accent\)[^}]*outline-offset:\s*2px/.test(css),
-    'missing :focus-visible outline "2px solid var(--accent)" with offset 2px',
+    !/:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--accent\)/.test(css),
+    'missing :focus-visible outline "2px solid var(--accent)"',
+  );
+  throwIf(
+    !/:focus-visible\s*\{[^}]*outline-offset:\s*2px/.test(css),
+    'missing :focus-visible "outline-offset: 2px"',
   );
 });
 
