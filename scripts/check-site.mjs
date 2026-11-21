@@ -432,6 +432,19 @@ check("assets/css/site.css .plugin-row is a horizontally scrollable row and card
   );
 });
 
+// --- MT-009: sideways looping scroll for the WordPress plugin row
+check("assets/js/main.js applies createLoopScroller with axis \"x\" to #plugin-row", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./loop-scroll.js"'), 'missing import from "./loop-scroll.js"');
+  throwIf(!src.includes("createLoopScroller("), "missing createLoopScroller() call");
+  throwIf(
+    !/createLoopScroller\(\s*row\s*,\s*\{[^}]*axis:\s*"x"[^}]*gap:\s*20[^}]*\}\s*\)/.test(src),
+    'missing createLoopScroller(row, { axis: "x", gap: 20 }) call',
+  );
+  throwIf(!src.includes('getElementById("plugin-row")'), 'missing render target getElementById("plugin-row")');
+  throwIf(!/renderPlugins\(\s*row\s*,/.test(src), "renderPlugins() must run before the loop is created");
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {

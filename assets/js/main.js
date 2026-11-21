@@ -4,6 +4,7 @@ import { renderAppLauncher } from "./apps.js";
 import { buildMeter } from "./voice.js";
 import { initPreviewAnimations } from "./animations.js";
 import { renderPlugins } from "./plugins.js";
+import { createLoopScroller } from "./loop-scroll.js";
 
 // MT-003: hero app launcher — list from data/apps.json.
 // On load failure loadApps() resolves to [] and renderAppLauncher
@@ -26,7 +27,15 @@ initPreviewAnimations();
 
 // MT-008: WordPress plugin cards — row from data/plugins.json.
 // On load failure loadPlugins() resolves to [] and renderPlugins
-// hides the row. The sideways auto-scroll loop lands in a later task.
+// hides the row.
+// MT-009: sideways looping auto-scroll for the row (1px every 40ms,
+// gap 20px). No-op while all cards fit or the row is hidden; pauses on
+// hover/focus/touch; never runs under prefers-reduced-motion: reduce.
 loadPlugins().then((plugins) => {
-  renderPlugins(document.getElementById("plugin-row"), plugins);
+  const row = document.getElementById("plugin-row");
+  renderPlugins(row, plugins);
+  if (row.hidden) return;
+  if (row.__pluginLoop) row.__pluginLoop.destroy();
+  row.__pluginLoop = createLoopScroller(row, { axis: "x", gap: 20 });
+  row.__pluginLoop.start();
 });
