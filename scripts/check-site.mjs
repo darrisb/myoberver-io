@@ -535,6 +535,66 @@ check("assets/css/site.css .footer__nav[hidden] hides the Apps nav on load failu
   );
 });
 
+// --- MT-011: responsive and accessibility pass
+check("index.html has Open Graph meta tags (og:title, og:description, og:type=website, og:url)", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<meta[^>]*property="og:title"[^>]*content="[^"]+"/.test(html),
+    'missing og:title meta tag',
+  );
+  throwIf(
+    !/<meta[^>]*property="og:description"[^>]*content="[^"]+"/.test(html),
+    'missing og:description meta tag',
+  );
+  throwIf(
+    !/<meta[^>]*property="og:type"[^>]*content="website"/.test(html),
+    'missing og:type=website meta tag',
+  );
+  throwIf(
+    !/<meta[^>]*property="og:url"[^>]*content="https:\/\/myobserver\.io\/"/.test(html),
+    'missing og:url=https://myobserver.io/ meta tag',
+  );
+});
+
+check("index.html has no TODO strings other than the contact-email and email-service TODOs", () => {
+  throwIf(!html, "index.html not available");
+  const todos = html.match(/TODO[^\n<>]*/g) || [];
+  todos.forEach((todo) => {
+    throwIf(
+      !/contact email/.test(todo) && !/email service/.test(todo),
+      `unexpected TODO in index.html: "${todo.trim()}"`,
+    );
+  });
+});
+
+check("assets/css/site.css .updates__box padding reduces to 24px on phones (max-width: 640px)", () => {
+  const css = read("assets/css/site.css");
+  throwIf(
+    !/@media\s*\(max-width:\s*640px\)\s*\{\s*\.updates__box\s*\{[^}]*padding:\s*24px/.test(css),
+    "missing @media (max-width: 640px) .updates__box { padding: 24px } rule",
+  );
+});
+
+check("assets/css/site.css interactive elements are at least 44px tall and :focus-visible has the accent outline", () => {
+  const css = read("assets/css/site.css");
+  const findRule = (selector) => {
+    const escaped = selector.replace(/[.#]/g, "\\$&");
+    const match = css.match(new RegExp(`${escaped}\\s*\\{[^}]*\\}`));
+    throwIf(!match, `missing rule for ${selector}`);
+    return match[0];
+  };
+  for (const selector of [".btn", ".site-nav__link", ".brand", ".footer__links a"]) {
+    throwIf(
+      !findRule(selector).includes("min-height: 44px"),
+      `${selector} is missing "min-height: 44px"`,
+    );
+  }
+  throwIf(
+    !/:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--accent\)[^}]*outline-offset:\s*2px/.test(css),
+    'missing :focus-visible outline "2px solid var(--accent)" with offset 2px',
+  );
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
