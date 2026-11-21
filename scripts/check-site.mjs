@@ -443,6 +443,10 @@ check("assets/js/main.js applies createLoopScroller with axis \"x\" to #plugin-r
   );
   throwIf(!src.includes('getElementById("plugin-row")'), 'missing render target getElementById("plugin-row")');
   throwIf(!/renderPlugins\(\s*row\s*,/.test(src), "renderPlugins() must run before the loop is created");
+  throwIf(
+    !/if\s*\(\s*!row\s*\|\|\s*row\.hidden\s*\)\s*return\s*;/.test(src),
+    "missing null-tolerant guard (if (!row || row.hidden) return;) before the loop scroller is created",
+  );
 });
 
 // --- summary

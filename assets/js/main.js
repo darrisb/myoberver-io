@@ -34,7 +34,7 @@ initPreviewAnimations();
 loadPlugins().then((plugins) => {
   const row = document.getElementById("plugin-row");
   renderPlugins(row, plugins);
-  if (row.hidden) return;
+  if (!row || row.hidden) return;
   if (row.__pluginLoop) row.__pluginLoop.destroy();
   row.__pluginLoop = createLoopScroller(row, { axis: "x", gap: 20 });
   row.__pluginLoop.start();
