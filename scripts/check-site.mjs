@@ -525,6 +525,16 @@ check("assets/js/main.js wires the updates form and the footer", () => {
   throwIf(!src.includes("renderFooterApps("), "missing renderFooterApps() call");
 });
 
+check("assets/css/site.css .footer__nav[hidden] hides the Apps nav on load failure", () => {
+  const css = read("assets/css/site.css");
+  const rule = css.match(/\.footer__nav\[hidden\]\s*\{[^}]*\}/);
+  throwIf(!rule, "missing .footer__nav[hidden] rule");
+  throwIf(
+    !/display:\s*none/.test(rule[0]),
+    '.footer__nav[hidden] must declare "display: none" so a load-failure nav is truly hidden',
+  );
+});
+
 // --- summary
 console.log(`check-site: ${passed} passed, ${failures.length} failed`);
 if (failures.length > 0) {
