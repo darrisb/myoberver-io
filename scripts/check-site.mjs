@@ -120,7 +120,14 @@ check("every file referenced by index.html (css, js, favicons) exists", () => {
 
   let checked = 0;
   for (const ref of refs) {
-    if (/^(https?:)?\/\//.test(ref) || ref.startsWith("data:") || ref.startsWith("#")) continue;
+    // Skip non-file references: external URLs, data URIs, in-page
+    // fragments, and non-file URI schemes such as mailto:/tel:.
+    if (
+      /^(https?:)?\/\//.test(ref) ||
+      ref.startsWith("data:") ||
+      ref.startsWith("#") ||
+      /^[a-z][a-z0-9+.-]*:/i.test(ref)
+    ) continue;
     const filePath = path.normalize(path.join(root, ref));
     throwIf(filePath !== root && !filePath.startsWith(root + path.sep), `${ref} escapes the project root`);
     throwIf(!existsSync(filePath), `referenced file is missing: ${ref}`);
@@ -447,6 +454,75 @@ check("assets/js/main.js applies createLoopScroller with axis \"x\" to #plugin-r
     !/if\s*\(\s*!row\s*\|\|\s*row\.hidden\s*\)\s*return\s*;/.test(src),
     "missing null-tolerant guard (if (!row || row.hidden) return;) before the loop scroller is created",
   );
+});
+
+// --- MT-010: launch-updates form and footer
+check("index.html has #updates-form with a required #updates-email email input and an aria-live message", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(
+    !/<form[^>]*id="updates-form"/.test(html),
+    'missing <form id="updates-form">',
+  );
+  throwIf(
+    !/<input[^>]*id="updates-email"[^>]*type="email"[^>]*required/.test(html),
+    'missing <input id="updates-email" type="email" required>',
+  );
+  throwIf(
+    !/aria-live="polite"/.test(html),
+    'missing aria-live="polite" confirmation element',
+  );
+});
+
+check("index.html footer has nav[aria-label=Apps] and nav[aria-label=Company]", () => {
+  throwIf(!html, "index.html not available");
+  const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/);
+  throwIf(!footerMatch, "missing <footer> block");
+  const footer = footerMatch[0];
+  throwIf(!/<nav[^>]*aria-label="Apps"/.test(footer), 'missing footer <nav aria-label="Apps">');
+  throwIf(
+    !/<nav[^>]*aria-label="Company"/.test(footer),
+    'missing footer <nav aria-label="Company">',
+  );
+});
+
+check("index.html footer brand has a copyright line with #footer-year", () => {
+  throwIf(!html, "index.html not available");
+  throwIf(!/<span[^>]*id="footer-year"/.test(html), 'missing <span id="footer-year">');
+});
+
+check("assets/js/updates.js exports initUpdatesForm(), setFooterYear() and renderFooterApps()", () => {
+  const src = read("assets/js/updates.js");
+  for (const name of ["initUpdatesForm", "setFooterYear", "renderFooterApps"]) {
+    throwIf(!exportedFn(src, name), `missing export of ${name}()`);
+  }
+  throwIf(!/preventDefault\(\)/.test(src), "missing preventDefault() on form submit");
+  throwIf(!/checkValidity\(\)/.test(src), "missing the input's built-in validity check");
+  throwIf(
+    !/new Date\(\)\.getFullYear\(\)/.test(src),
+    "missing new Date().getFullYear() for the footer year",
+  );
+  throwIf(!/icon === "more"/.test(src), 'missing the "more" launcher exclusion in renderFooterApps()');
+  throwIf(!/TODO: send to email service/.test(src), "missing TODO comment for the email service");
+});
+
+check("assets/js/main.js wires the updates form and the footer", () => {
+  const src = read("assets/js/main.js");
+  throwIf(!src.includes('from "./updates.js"'), 'missing import from "./updates.js"');
+  throwIf(
+    !src.includes('getElementById("updates-form")'),
+    'missing render target getElementById("updates-form")',
+  );
+  throwIf(!src.includes("initUpdatesForm("), "missing initUpdatesForm() call");
+  throwIf(
+    !src.includes('getElementById("footer-year")'),
+    'missing render target getElementById("footer-year")',
+  );
+  throwIf(!src.includes("setFooterYear("), "missing setFooterYear() call");
+  throwIf(
+    !src.includes('getElementById("footer-apps")'),
+    'missing render target getElementById("footer-apps")',
+  );
+  throwIf(!src.includes("renderFooterApps("), "missing renderFooterApps() call");
 });
 
 // --- summary

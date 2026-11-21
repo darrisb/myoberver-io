@@ -5,6 +5,7 @@ import { buildMeter } from "./voice.js";
 import { initPreviewAnimations } from "./animations.js";
 import { renderPlugins } from "./plugins.js";
 import { createLoopScroller } from "./loop-scroll.js";
+import { initUpdatesForm, renderFooterApps, setFooterYear } from "./updates.js";
 
 // MT-003: hero app launcher — list from data/apps.json.
 // On load failure loadApps() resolves to [] and renderAppLauncher
@@ -38,4 +39,15 @@ loadPlugins().then((plugins) => {
   if (row.__pluginLoop) row.__pluginLoop.destroy();
   row.__pluginLoop = createLoopScroller(row, { axis: "x", gap: 20 });
   row.__pluginLoop.start();
+});
+
+// MT-010: launch-updates form — preventDefault, built-in email
+// validation, inline aria-live confirmation. Sends nothing yet
+// (no backend; see the TODO in updates.js).
+// MT-010: footer — copyright year from new Date().getFullYear() and
+// Apps links from loadApps(), excluding the "more" launcher entry.
+initUpdatesForm(document.getElementById("updates-form"));
+setFooterYear(document.getElementById("footer-year"));
+loadApps().then((apps) => {
+  renderFooterApps(document.getElementById("footer-apps"), apps);
 });

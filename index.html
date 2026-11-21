@@ -181,8 +181,46 @@
         <div id="plugin-row" class="plugin-row" role="region" aria-label="WordPress plugins" tabindex="0"></div>
       </div>
     </section>
-    <section id="updates"></section>
+    <section id="updates">
+      <div class="container">
+        <div class="updates__box">
+          <div class="updates__copy">
+            <h2>Hear when a new app opens.</h2>
+            <p>One email per launch. Nothing else.</p>
+          </div>
+          <form id="updates-form">
+            <label class="visually-hidden" for="updates-email">Email address</label>
+            <input id="updates-email" name="email" type="email" required placeholder="you@company.com" autocomplete="email">
+            <button type="submit">Notify me</button>
+            <p id="updates-message" class="updates__message" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer></footer>
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a class="footer__brand-link" href="#top">
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="8" fill="#0E1726"/><path d="M6 16h5l2.5-6 5 12 2.5-6h5" stroke="#F6B94F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>MyObserver</span>
+        </a>
+        <p class="footer__copyright">© <span id="footer-year">2026</span> MyObserver</p>
+      </div>
+      <nav id="footer-apps" aria-label="Apps" class="footer__nav">
+        <span class="footer__label">Apps</span>
+        <ul class="footer__links"></ul>
+      </nav>
+      <nav aria-label="Company" class="footer__nav">
+        <span class="footer__label">Company</span>
+        <ul class="footer__links">
+          <li><a href="https://github.com/darrisb">GitHub</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#terms">Terms</a></li>
+          <li><!-- TODO: real contact email --><a href="mailto:hello@myobserver.io">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
 </body>
 </html>
